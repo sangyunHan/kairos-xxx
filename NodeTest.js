@@ -4,15 +4,17 @@
 
 
 var express = require("express");
-var app = express.createServer(express.logger());
+var logfmt = require("logfmt");
+var app = express();
 
-app.get('/', function(request, response) {
-    response.send("Hello World");
+app.use(logfmt.requestLogger());
+app.get("/", function(request, response) {
+	response.send("Hello World this is heroku node js");
 });
 
-var port = process.env.PORT || 5000;
+var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
-   console.log("listening on this port : " + port);
+	console.log("listening on : " + port);
 });
 
 
